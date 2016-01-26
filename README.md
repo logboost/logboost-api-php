@@ -6,6 +6,9 @@
 ##Update composer
     composer update
 
+##Include LogboostAPI
+    include("logboost-api-php/LogboostAPI.php") ;
+
 ##Define global variables
     Logboost_clientID = "Your Logboost client id"
     Logboost_clientSecret = "Your Logboost client secret" ;

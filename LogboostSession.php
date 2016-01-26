@@ -11,7 +11,7 @@ class LogboostSession
 	protected $plan ;
 
 	public function __construct($redirect) {
-		if(!$GLOBALS['Logboost_clientID'] || $GLOBALS['Logboost_clientSecret'])
+		if(!isset($GLOBALS['Logboost_clientID']) || !isset($GLOBALS['Logboost_clientSecret']))
 			die("Logboost_clientID or Logboost_clientSecret not defined !") ;
 		$oidc = new OpenIDConnectClient('http://logboost.com/',$GLOBALS['Logboost_clientID'],$GLOBALS['Logboost_clientSecret']);
 		$oidc->addScope("openid profile payment") ;
