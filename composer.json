@@ -1,5 +1,5 @@
 {
-    "name": "logboost-api-php",
+    "name": "logboost/logboost-api-php",
     "repositories": [
 	    {
 	    	"type": "vcs",
