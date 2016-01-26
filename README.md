@@ -6,6 +6,11 @@
 ##Update composer
     composer update
 
+##Install phpunit
+    wget https://phar.phpunit.de/phpunit.phar
+    php phpunit.phar --version
+    phpunit --bootstrap autoload.php tests/
+
 ##Include LogboostAPI
     include("logboost-api-php/LogboostAPI.php") ;
 

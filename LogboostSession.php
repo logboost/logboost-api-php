@@ -9,16 +9,17 @@ class LogboostSession
 	protected $date ;
 	protected $validuntil ;
 	protected $plan ;
+	protected $oidc ;
 
 	public function __construct($redirect) {
 		if(!isset($GLOBALS['Logboost_clientID']) || !isset($GLOBALS['Logboost_clientSecret']))
-			die("Logboost_clientID or Logboost_clientSecret not defined !") ;
-		$oidc = new OpenIDConnectClient('http://logboost.com/',$GLOBALS['Logboost_clientID'],$GLOBALS['Logboost_clientSecret']);
-		$oidc->addScope("openid profile payment") ;
+			throw new UnableToConnectException('Client id or secret id not specified') ;
+		$this->oidc = new OpenIDConnectClient('http://logboost.com/',$GLOBALS['Logboost_clientID'],$GLOBALS['Logboost_clientSecret']);
+		$this->oidc->addScope("openid profile payment") ;
 		if($redirect != null) {
-			$oidc->setRedirectURL($redirect);
+			$this->oidc->setRedirectURL($redirect);
 		} 
-		$oidc->authenticate();
+		$this->oidc->authenticate();
 	}
 
 	public function __get($property) {
@@ -38,6 +39,8 @@ class LogboostSession
 	    	return $this->validuntil;
 	    } else if('plan' === $property) {
 	    	return $this->plan;
+	    } else if('oidc' === $property) {
+	    	return $this->oidc;
 	    } else {
 	      throw new Exception('Invalid property');
 	    }
@@ -60,22 +63,20 @@ class LogboostSession
 	      $this->validuntil = $value; 
 	    } else if('plan' === $property) {
 	      $this->plan = $value; 
+	    } else if('oidc' === $property) {
+	      $this->oidc = $value; 
 	    } else {
 	      throw new Exception('Invalid property '.$property);
 	    }
   	}
 
   	function handleSession() {
-  		$this->sid = session_id() ;
-
-  		session_regenerate_id();
-		session_start();
-		
-		$this->username = $oidc->requestUserInfo('preferred_username');
+  		$this->sid = session_id() ;		
+		$this->username = $this->oidc->requestUserInfo('preferred_username');
 		$this->ip = $_SERVER['REMOTE_ADDR'] ;
 		$this->date = @date('c') ;
-		$this->validuntil = $oidc->requestUserInfo('valid_until');
-		$this->plan = $oidc->requestUserInfo('plan');
+		$this->validuntil = $this->oidc->requestUserInfo('valid_until');
+		$this->plan = $this->oidc->requestUserInfo('plan');
   	}
 
   	function isPremium() {
