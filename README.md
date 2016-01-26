@@ -27,6 +27,9 @@
 ##Create Logboost session
     $session = new LogboostSession([redirect_url]) ;
 
+##Open Logboost session
+    $session->openSession() ;
+
 ##After-login callback ( redirect_url )
     $session->handleSession() ;
 

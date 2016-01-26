@@ -14,12 +14,6 @@ class LogboostSession
 	public function __construct($redirect) {
 		if(!isset($GLOBALS['Logboost_clientID']) || !isset($GLOBALS['Logboost_clientSecret']))
 			throw new UnableToConnectException('Client id or secret id not specified') ;
-		$this->oidc = new OpenIDConnectClient('http://logboost.com/',$GLOBALS['Logboost_clientID'],$GLOBALS['Logboost_clientSecret']);
-		$this->oidc->addScope("openid profile payment") ;
-		if($redirect != null) {
-			$this->oidc->setRedirectURL($redirect);
-		} 
-		$this->oidc->authenticate();
 	}
 
 	public function __get($property) {
@@ -68,6 +62,15 @@ class LogboostSession
 	    } else {
 	      throw new Exception('Invalid property '.$property);
 	    }
+  	}
+
+  	function openSession() {
+		$this->oidc = new OpenIDConnectClient('http://logboost.com/',$GLOBALS['Logboost_clientID'],$GLOBALS['Logboost_clientSecret']);
+		$this->oidc->addScope("openid profile payment") ;
+		if($redirect != null) {
+			$this->oidc->setRedirectURL($redirect);
+		} 
+		$this->oidc->authenticate();
   	}
 
   	function handleSession() {
