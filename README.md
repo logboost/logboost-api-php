@@ -6,6 +6,11 @@
 ##Update composer
     composer update 
     	--prefer-dist to remove .git
+###For composer, add OpenID-Connect-PHP repository 
+    {
+        "type": "vcs",
+        "url": "https://github.com/jumbojett/OpenID-Connect-PHP"
+    }
 
 ##Install phpunit
     wget https://phar.phpunit.de/phpunit.phar
