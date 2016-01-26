@@ -122,7 +122,7 @@
         },
         "time": "2016-01-14 13:51:20",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "classmap": [
                 "OpenIDConnectClient.php"

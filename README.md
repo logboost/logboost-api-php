@@ -4,7 +4,8 @@
     curl -sS https://getcomposer.org/installer | php
 
 ##Update composer
-    composer update
+    composer update 
+    	--prefer-dist to remove .git
 
 ##Install phpunit
     wget https://phar.phpunit.de/phpunit.phar
