@@ -75,6 +75,7 @@ class LogboostSession
   	}
 
   	function handleSession() {
+  		$this->oidc->authenticate();
   		$this->sid = session_id() ;		
 		$this->username = $this->oidc->requestUserInfo('preferred_username');
 		$this->ip = $_SERVER['REMOTE_ADDR'] ;
