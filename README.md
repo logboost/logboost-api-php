@@ -34,19 +34,13 @@
     $session->handleSession() ;
 
 ##Session variables :
-###id
-    Local session id
-###sid
-    Php session id
-###authcode
-    Openid authentication code
-###username
-    Session username
-###ip
-    User IP
-###date
-    Session creation date
-###validuntil
-    Logboost plan end date
-###plan
-    Logboost subscribed plan id
+| Attribute   | Description                    |
+| ------------|--------------------------------|
+| id          | local session id               |
+| sid         | php session id                 |
+| authcode    | Openid authentication code     |
+| username    | Session username               |
+| ip          | User IP                        |
+| date        | Session creation date          |
+| validuntil  | Logboost plan end date         |
+| plan        | Logboost subscribed plan id    |
